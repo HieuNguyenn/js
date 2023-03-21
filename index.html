@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        alert('Chào mừng bạn đến với ứng dụng JavaScript đầu tiên');
+    </script>
+    <p id="name"></p>
+    <p id="name2"></p>
+    <p id="name3"></p>
+    <p id="name4"></p>
+    <button id="button">Điền thông tin</button>
+    <script>
+        dien = document.getElementById("button");
+        dien.onclick = hien;
+        function hien() {
+            let theP = document.getElementById("name");
+            let theP2 = document.getElementById("name2");
+            let theP3 = document.getElementById("name3");
+            let theP4 = document.getElementById("name4");
+            let hovaten = prompt("Yêu cầu nhập tên của bạn");
+            let sodienthoai = prompt("Nhập số điện thoại của bạn");
+            let thanhpho = prompt("Nhập thành phố bạn đang sống");
+
+
+            let yeucaunhap = true;
+            while (yeucaunhap) {
+                let now = new Date().getFullYear();
+                let namsinh = prompt("Nhập năm sinh của bạn");
+                if (namsinh > now) {
+                    alert("Bạn đừng có điêu năm này là năm" + now);
+
+                } else {
+                    theP.innerHTML = "<b>" + hovaten + "</b>";
+                    theP2.innerHTML = "<b>" + (now - namsinh) + "</b>";
+                    theP3.innerHTML = "<b>" + sodienthoai + "</b>";
+                    theP4.innerHTML = "<b>" + thanhpho + "</b>";
+                    yeucaunhap = false;
+                    break;
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>
