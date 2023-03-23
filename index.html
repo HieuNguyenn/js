@@ -6,49 +6,127 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid;
+            border-collapse: collapse;
+        }
+
+        table {
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
+    <p>Tên</p> <input type="text" id="ten">
+    <p>DOB</p> <input type="text" id="dob">
+    <p>Điểm Toán</p> <input type="text" id="diemtoan">
+    <p>Điểm Lý</p> <input type="text" id="diemly">
+    <p>Điểm Hóa</p> <input type="text" id="diemhoa">
+    <br>
+    <button id="nhap">Nhập</button>
+    <button id="diemtrungbinh">Tính Điểm Trung Bình</button>
+    <button id="hocluc">Xác Định Học Lực</button>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Họ và tên</th>
+                <th>Ngày tháng năm sinh</th>
+                <th>Điểm toán</th>
+                <th>Điểm lý</th>
+                <th>Điểm hóa</th>
+                <th>Điểm trung bình</th>
+                <th>Học lực</th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
     <script>
-        alert('Chào mừng bạn đến với ứng dụng JavaScript đầu tiên');
-    </script>
-    <p id="name"></p>
-    <p id="name2"></p>
-    <p id="name3"></p>
-    <p id="name4"></p>
-    <button id="button">Điền thông tin</button>
-    <script>
-        dien = document.getElementById("button");
-        dien.onclick = hien;
-        function hien() {
-            let theP = document.getElementById("name");
-            let theP2 = document.getElementById("name2");
-            let theP3 = document.getElementById("name3");
-            let theP4 = document.getElementById("name4");
-            let hovaten = prompt("Yêu cầu nhập tên của bạn");
-            let sodienthoai = prompt("Nhập số điện thoại của bạn");
-            let thanhpho = prompt("Nhập thành phố bạn đang sống");
+        index = 1;
+        let nhap = document.getElementById("nhap")
+        nhap.onclick = addrow;
+        function addrow() {
+            let tbody = document.getElementById("tbody");
+            let tr1 = document.createElement("tr");
+            tbody.append(tr1);
+            console.log(tr1);
+            tr1.id = index;
+            let hoten = document.getElementById("ten");
+            let lop = document.getElementById("lop");
+            let ngaysinh = document.getElementById("dob");
+            let diemtoan = document.getElementById("diemtoan");
+            let diemly = document.getElementById("diemly");
+            let diemhoa = document.getElementById("diemhoa");
 
+            let tdhoten = document.createElement("td");
+            let tdngaysinh = document.createElement("td");
+            let tddiemtoan = document.createElement("td");
+            let tddiemly = document.createElement("td");
+            let tddiemhoa = document.createElement("td");
+            let tddiemtrungbinh = document.createElement("td");
+            let tdhocluc = document.createElement("td");
 
-            let yeucaunhap = true;
-            while (yeucaunhap) {
-                let now = new Date().getFullYear();
-                let namsinh = prompt("Nhập năm sinh của bạn");
-                if (namsinh > now) {
-                    alert("Bạn đừng có điêu năm này là năm" + now);
+            tr1.append(tdhoten);
+            tr1.append(tdngaysinh);
+            tr1.append(tddiemtoan);
+            tr1.append(tddiemly);
+            tr1.append(tddiemhoa);
+            tr1.append(tddiemtrungbinh);
+            tr1.append(tdhocluc);
 
+            tddiemtoan.id = "toan" + index;
+            tddiemhoa.id = "hoa" + index;
+            tddiemly.id = "ly" + index;
+            tddiemtrungbinh.id = "dtb" + index;
+            tdhocluc.id = "hluc" + index;
+            index = index + 1;
+
+            tdhoten.innerHTML = ten.value;
+            tdngaysinh.innerHTML = dob.value;
+            tddiemtoan.innerHTML = diemtoan.value;
+            tddiemly.innerHTML = diemly.value;
+            tddiemhoa.innerHTML = diemhoa.value;
+        }
+
+        let diemtb = document.getElementById("diemtrungbinh");
+        diemtb.onclick = dtrungbinh;
+        function dtrungbinh() {
+            for (let i = 1; i < index; i++) {
+                let dtoan = document.getElementById("toan" + i);
+                console.log(dtoan.innerHTML);
+                let dly = document.getElementById("ly" + i);
+                console.log(dly.innerHTML);
+                let dhoa = document.getElementById("hoa" + i);
+                console.log(dhoa.innerHTML);
+                let dtrungbinh = document.getElementById("dtb" + i)
+
+                dtrungbinh.innerHTML = (dtoan.innerHTML - (-dly.innerHTML) - (-dhoa.innerHTML)) / 3;
+            }
+        }
+        let hocluc = document.getElementById("hocluc")
+        hocluc.onclick = hl
+        function hl() {
+            for (let i = 1; i < index; i++) {
+                let dtrungbinh = document.getElementById("dtb" + i)
+                console.log(dtrungbinh.innerHTML);
+                let hluc = document.getElementById("hluc" + i)
+                console.log(hluc.innerHTML);
+                if (dtrungbinh.innerHTML >= 8) {
+                    hluc.innerHTML = "Giỏi"
+                } else if (6.5 <= dtrungbinh.innerHTML && dtrungbinh.innerHTML < 8) {
+                    hluc.innerHTML = "Khá"
+                } else if (5 <= dtrungbinh.innerHTML && dtrungbinh.innerHTML < 6.5) {
+                    hluc.innerHTML = "Trung Bình"
                 } else {
-                    theP.innerHTML = "<b>" + hovaten + "</b>";
-                    theP2.innerHTML = "<b>" + (now - namsinh) + "</b>";
-                    theP3.innerHTML = "<b>" + sodienthoai + "</b>";
-                    theP4.innerHTML = "<b>" + thanhpho + "</b>";
-                    yeucaunhap = false;
-                    break;
+                    hluc.innerHTML = "Yếu"
                 }
             }
         }
     </script>
-
 </body>
 
 </html>
