@@ -6,19 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        table,
-        th,
-        td {
-            border: 1px solid;
-            border-collapse: collapse;
-        }
-
-        table {
-            width: 100%;
-        }
-    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid;
+        border-collapse: collapse;
+    }
+
+    table {
+        width: 100%;
+    }
+</style>
 
 <body>
     <p>Tên</p> <input type="text" id="ten">
@@ -46,87 +47,85 @@
         <tbody id="tbody"></tbody>
     </table>
     <script>
-        index = 1;
-        let nhap = document.getElementById("nhap")
-        nhap.onclick = addrow;
+        let index = 1;
+        let nhap = $("#nhap");
+        nhap.on("click", addrow);
         function addrow() {
-            let tbody = document.getElementById("tbody");
-            let tr1 = document.createElement("tr");
-            tbody.append(tr1);
-            console.log(tr1);
-            tr1.id = index;
-            let hoten = document.getElementById("ten");
-            let lop = document.getElementById("lop");
-            let ngaysinh = document.getElementById("dob");
-            let diemtoan = document.getElementById("diemtoan");
-            let diemly = document.getElementById("diemly");
-            let diemhoa = document.getElementById("diemhoa");
+            let tbody = $("#tbody");
+            let tr1 = $("<tr>");
 
-            let tdhoten = document.createElement("td");
-            let tdngaysinh = document.createElement("td");
-            let tddiemtoan = document.createElement("td");
-            let tddiemly = document.createElement("td");
-            let tddiemhoa = document.createElement("td");
-            let tddiemtrungbinh = document.createElement("td");
-            let tdhocluc = document.createElement("td");
+            let ten = $("#ten");
+            let dob = $("#dob");
+            let toan = $("#diemtoan");
+            let ly = $("#diemly");
+            let hoa = $("#diemhoa");
 
-            tr1.append(tdhoten);
-            tr1.append(tdngaysinh);
-            tr1.append(tddiemtoan);
-            tr1.append(tddiemly);
-            tr1.append(tddiemhoa);
-            tr1.append(tddiemtrungbinh);
-            tr1.append(tdhocluc);
+            let tdten = $("<td>");
+            let tddob = $("<td>");
+            let tdtoan = $("<td>")
+            let tdly = $("<td>");
+            let tdhoa = $("<td>");
+            let tddtb = $("<td>");
+            let tdhocluc = $("<td>")
 
-            tddiemtoan.id = "toan" + index;
-            tddiemhoa.id = "hoa" + index;
-            tddiemly.id = "ly" + index;
-            tddiemtrungbinh.id = "dtb" + index;
-            tdhocluc.id = "hluc" + index;
+            $("#tbody").append(tr1);
+            $(tr1).append(tdten);
+            $(tr1).append(tddob);
+            $(tr1).append(tdtoan);
+            $(tr1).append(tdly);
+            $(tr1).append(tdhoa);
+            $(tr1).append(tddtb);
+            $(tr1).append(tdhocluc);
+
+            tdtoan.attr("id", "toan" + index);
+            tdly.attr("id", "ly" + index);
+            tdhoa.attr("id", "hoa" + index);
+            tddtb.attr("id", "dtb" + index);
+            tdhocluc.attr("id", "hocluc" + index);
             index = index + 1;
 
-            tdhoten.innerHTML = ten.value;
-            tdngaysinh.innerHTML = dob.value;
-            tddiemtoan.innerHTML = diemtoan.value;
-            tddiemly.innerHTML = diemly.value;
-            tddiemhoa.innerHTML = diemhoa.value;
+            tdten.html(ten.val());
+            tddob.html(dob.val());
+            tdtoan.html(toan.val());
+            tdly.html(ly.val());
+            tdhoa.html(hoa.val());
         }
-
-        let diemtb = document.getElementById("diemtrungbinh");
-        diemtb.onclick = dtrungbinh;
+        let diemtrungbinh = $("#diemtrungbinh")
+        diemtrungbinh.on("click", dtrungbinh)
         function dtrungbinh() {
             for (let i = 1; i < index; i++) {
-                let dtoan = document.getElementById("toan" + i);
-                console.log(dtoan.innerHTML);
-                let dly = document.getElementById("ly" + i);
-                console.log(dly.innerHTML);
-                let dhoa = document.getElementById("hoa" + i);
-                console.log(dhoa.innerHTML);
-                let dtrungbinh = document.getElementById("dtb" + i)
-
-                dtrungbinh.innerHTML = (dtoan.innerHTML - (-dly.innerHTML) - (-dhoa.innerHTML)) / 3;
+                let dtoan = $("#toan" + i)
+                console.log(dtoan.html());
+                let dly = $("#ly" + i);
+                console.log(dly.html());
+                let dhoa = $("#hoa" + i);
+                console.log(dhoa.html());
+                let diemtb = $("#dtb" + i);
+                console.log(diemtb.html());
+                diemtb.html((dtoan.html() - (-dly.html()) - (-dhoa.html())) / 3);
             }
         }
-        let hocluc = document.getElementById("hocluc")
-        hocluc.onclick = hl
-        function hl() {
-            for (let i = 1; i < index; i++) {
-                let dtrungbinh = document.getElementById("dtb" + i)
-                console.log(dtrungbinh.innerHTML);
-                let hluc = document.getElementById("hluc" + i)
-                console.log(hluc.innerHTML);
-                if (dtrungbinh.innerHTML >= 8) {
-                    hluc.innerHTML = "Giỏi"
-                } else if (6.5 <= dtrungbinh.innerHTML && dtrungbinh.innerHTML < 8) {
-                    hluc.innerHTML = "Khá"
-                } else if (5 <= dtrungbinh.innerHTML && dtrungbinh.innerHTML < 6.5) {
-                    hluc.innerHTML = "Trung Bình"
+            let hocluc = $("#hocluc")
+            hocluc.on("click", hluc)
+            function hluc() {
+                for (let i = 1; i < index; i++) {
+                    let diemtb = $("#dtb" + i);
+                    console.log(diemtb.html());
+                    let hl = $("#hocluc" + i)
+                    console.log(hl.html());
+                 if (diemtb.html() >= 8) {
+                    hl.html("Giỏi")
+                } else if (6.5 <= diemtb.html() && diemtb.html() < 8) {
+                    hl.html("Khá")
+                } else if (5 <= diemtb.html() && diemtb.html() < 6.5) {
+                    hl.html("Trung Bình")
                 } else {
-                    hluc.innerHTML = "Yếu"
+                    hl.html("yếu")
                 }
             }
         }
     </script>
+
 </body>
 
 </html>
