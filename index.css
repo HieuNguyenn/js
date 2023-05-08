@@ -1,0 +1,17 @@
+main> div > img{
+    width:80%;
+}
+main{
+    display: grid;
+    grid-template-columns: 16.666666667% 16.666666667% 16.666666667% 16.666666667% 16.666666667% 16.666666667%;
+    text-align: center;
+}
+main > div {
+    border: 2px solid;
+    border-radius: 5px;
+    margin: auto 10px 10px;
+}
+body{
+    max-width: 1300px;
+    margin: auto;
+}
