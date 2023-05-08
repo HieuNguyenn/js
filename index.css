@@ -1,17 +1,63 @@
-main> div > img{
-    width:80%;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-main{
-    display: grid;
-    grid-template-columns: 16.666666667% 16.666666667% 16.666666667% 16.666666667% 16.666666667% 16.666666667%;
+
+.slide {
+    width: 100%;
+}
+
+.container {
+    margin: 0 auto;
+    margin-top: 20px;
+    max-width: 1200px;
+    position: relative;
+}
+
+.next,
+.prev {
+    position: absolute;
+    top: 46%;
+    font-size: 45px;
+    color: white;
+}
+
+.prev {
+    padding-left: 250px;
+}
+
+.next {
+    right: 0;
+    padding-right: 250px;
+}
+
+.text1,
+.text2 {
+    position: absolute;
+    color: white;
     text-align: center;
+    width: 100%;
 }
-main > div {
-    border: 2px solid;
-    border-radius: 5px;
-    margin: auto 10px 10px;
+
+.text1 {
+    bottom: 22%;
+    font-size: 28px;
 }
-body{
-    max-width: 1300px;
-    margin: auto;
+
+.text2 {
+    bottom: 14%;
+    font-size: 20px;
+}
+.dsadsa .btn{
+    width: 15px;
+    height: 15px;
+    margin: 2px;
+    border-radius: 50%;
+    cursor: pointer;
+   color:white ;
+    background-color: black; 
+}
+.btn:hover{
+    background-color: white;
 }
